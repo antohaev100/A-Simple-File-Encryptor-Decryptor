@@ -28,5 +28,9 @@ set(SOURCES
 # Create executable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
+# Enable testing
+enable_testing()
+add_subdirectory(tests)
+
 # Optional: Install target
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
