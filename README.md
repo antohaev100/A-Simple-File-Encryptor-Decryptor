@@ -18,7 +18,25 @@ A professional-grade file encryption and decryption tool implemented in C using 
 
 - **C Compiler**: GCC 15.1.0 or compatible (supports C11 standard)
 - **CMake**: Version 3.10 or higher
-- **CMocka**: For running tests (optional)
+- **CMocka**: For running tests *(optional - tests will be disabled if not available)*
+
+### Platform-Specific Setup
+
+#### Linux (Ubuntu/Debian):
+```bash
+sudo apt-get install build-essential cmake libcmocka-dev
+```
+
+#### macOS:
+```bash
+brew install cmake cmocka
+```
+
+#### Windows (MSYS2):
+```bash
+pacman -S mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-cmocka
+# pkg-config (pkgconf) is included by default in MSYS2
+```
 
 ### Building the Project
 
@@ -37,9 +55,11 @@ cmake ..
 # Build the executable
 cmake --build .
 
-# Run tests (optional)
+# Run tests (only if CMocka is installed)
 ctest --verbose
 ```
+
+**Note**: If CMocka is not installed, the main program will still build successfully, but tests will be disabled.
 
 ### Basic Usage
 

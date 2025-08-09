@@ -28,9 +28,20 @@ set(SOURCES
 # Create executable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-# Enable testing
-enable_testing()
-add_subdirectory(tests)
+# Optional testing - only if CMocka is available
+find_package(PkgConfig QUIET)
+if(PkgConfig_FOUND)
+    pkg_check_modules(CMOCKA cmocka)
+    if(CMOCKA_FOUND)
+        enable_testing()
+        add_subdirectory(tests)
+        message(STATUS "CMocka found - tests enabled")
+    else()
+        message(STATUS "CMocka not found - tests disabled")
+    endif()
+else()
+    message(STATUS "pkg-config not found - tests disabled")
+endif()
 
 # Optional: Install target
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
